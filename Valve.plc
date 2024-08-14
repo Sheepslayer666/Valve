@@ -1,0 +1,22 @@
+// Define variables
+VAR
+    TempSensor : REAL;       // Input: Temperature sensor reading
+    Valve : BOOL;            // Output: Valve control (True = Open, False = Closed)
+    CloseTemp : REAL := 50.0; // Temperature threshold to close the valve
+    OpenTemp : REAL := 10.0;  // Temperature threshold to open the valve
+    ValveState : BOOL := TRUE; // Internal state of the valve (True = Open, False = Closed)
+END_VAR
+
+// Main program logic
+BEGIN
+    // Close the valve if the temperature reaches or exceeds 50 degrees Celsius
+    IF TempSensor >= CloseTemp THEN
+        ValveState := FALSE; // Close the valve
+    // Open the valve if the temperature drops to 10 degrees Celsius or below
+    ELSIF TempSensor <= OpenTemp THEN
+        ValveState := TRUE;  // Open the valve
+    END_IF;
+
+    // Set the valve output to the internal valve state
+    Valve := ValveState;
+END_PROGRAM
